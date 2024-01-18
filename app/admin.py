@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Food
+from .models import Food, newFood
+
+
 
 # Register your models here.
 
 
-class Admin(admin.ModelAdmin):
-    list_display = ("title", "description", "completed")
 
+admin.site.register(Food)
+admin.site.register(newFood)
 
-admin.site.register(Food, Admin)

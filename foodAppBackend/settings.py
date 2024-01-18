@@ -57,8 +57,11 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permissions.AllowAny']}
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+        ]
+    }
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = [
@@ -92,7 +95,7 @@ WSGI_APPLICATION = 'foodAppBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'food-app',
+        'NAME': 'lunchbreak',
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PW'],
         'HOST': os.environ['DB_HOST'],
@@ -100,6 +103,9 @@ DATABASES = {
         'OPTIONS': {'sslmode': 'require'},
     }
 }
+
+#Registering User Model 
+# AUTH_USER_MODEL = "app.User"
 
 
 # Password validation
@@ -119,6 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization
