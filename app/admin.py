@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Food, newFood
-
+from .models import Food
 
 
 # Register your models here.
@@ -8,5 +7,5 @@ from .models import Food, newFood
 
 
 admin.site.register(Food)
-admin.site.register(newFood)
+
 
