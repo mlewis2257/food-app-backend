@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from .serializers import FoodSerializer, GroupSerializer, UserSerializer
 from .models import Food
 from django.contrib.auth.models import Group, User
+from .permissions import IsMemberOfGroup
 
 
 from django.contrib.auth.models import User
@@ -19,8 +20,9 @@ class FoodView(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    queryset = Group.objects.all()
+    permission_classes = [IsMemberOfGroup]
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
