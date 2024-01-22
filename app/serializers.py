@@ -14,9 +14,24 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ['id', 'name']
 
+# class UserSerializer(serializers.ModelSerializer):
+#     groups = GroupSerializer(many=True, read_only=True)
+
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username', 'groups']
+        
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'groups']
+
 class UserSerializer(serializers.ModelSerializer):
-    groups = GroupSerializer(many=True, read_only=True)
+    groups = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'groups']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'groups']
+
+    def get_groups(self, obj):
+        return [group.name for group in obj.groups.all()]
